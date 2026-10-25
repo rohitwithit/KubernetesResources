@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dep-student
+  template:
+    metadata:
+      name: tmp-3
+      labels:
+        app: dep-student
+    spec:
+      containers:
+      - name: cont-3
+        image: kaali28/front1:latest
+        ports:
+        - containerPort: 80

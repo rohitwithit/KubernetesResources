@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rs-student
+  template:
+    metadata:
+      labels:
+        app: rs-student
+    spec:
+      containers:
+      - name: cont-2
+        image: studentportal-backend:1.0.1
+        ports:
+        - containerPort: 80

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+    val: pod01
+spec:
+  containers:
+  - name: myfrontend
+    image: nginx
+    volumeMounts:
+    - mountPath: "/var/www/html"
+      name: pv-1
+
+  volumes:
+  - name: pv-1
+    persistentVolumeClaim:
+      claimName: pvc-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podserv
+spec:
+  selector:
+    val: pod01
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: NodePort
